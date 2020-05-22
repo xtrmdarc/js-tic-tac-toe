@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+main {
+  padding: 20px;
+}
+
+#board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: calc(100% / 3);
+  height: 80px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
