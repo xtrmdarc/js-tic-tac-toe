@@ -22,13 +22,16 @@ const gameBoard = ((dController) => {
   let board = [['','',''],['','',''],['','','']];
   let controller = dController;
   let currentPlayer;
-  let actualGame;
   let countMoves = 0;
 
   const setCurrentPlayer = (cPlayer) => {
     currentPlayer = cPlayer;
   }
 
+  const clearBoard = () => {
+    board = [['', '', ''],['', '', ''],['', '', '']];
+    countMoves = 0;
+  }
   const getBoard = () => {
     return board;
   }
@@ -90,7 +93,7 @@ const gameBoard = ((dController) => {
     }
   }
 
-  return {setCurrentPlayer, getBoard, applyMove, checkWinStates};
+  return {setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard};
 })(displayController);
 
 const Player = (pname, psymbol) => {
@@ -105,12 +108,23 @@ const Player = (pname, psymbol) => {
   return { getName, getSymbol };
 }
 
-const game = (() => {
-  let player1 = Player('Player 1', 'X');
-  let player2 = Player('Player 2', 'O');
-  let currentPlayer = player1;
+const startButton = () => {
+  let player1name = document.getElementById('p1name').value;
+  let player2name = document.getElementById('p2name').value;
+  game.startGame(player1name, player2name);
+}
 
-  const startGame = () => {
+const game = (() => {
+  let player1;
+  let player2;
+  let currentPlayer;
+  
+  const startGame = (player1name, player2name) => {
+    player1 = Player(player1name, 'X');
+    player2 = Player(player2name, 'O');
+    currentPlayer = player1;
+    gameBoard.clearBoard();
+
     displayController.renderBoard(gameBoard.getBoard());
     gameBoard.setCurrentPlayer(currentPlayer);
   }
@@ -128,11 +142,11 @@ const game = (() => {
   const handleWinStates = () => {
     switch(gameBoard.checkWinStates()) {
       case true : {
-        alert('gano el player ' + currentPlayer.getName());
+        alert(currentPlayer.getName() + 'Wins! Click start to play again');
         break;
       }
       case 'Tie' : {
-        alert("It's a tie !");
+        alert("It's a tie ! Click start to play again");
         break;
       }
       

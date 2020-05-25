@@ -22,3 +22,36 @@ main {
   align-items: center;
   justify-content: center;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+input[type="text"] {
+  border-bottom: 1px solid black;
+  padding: 5px;
+  margin: 10px;
+}
+
+input[type="button"] {
+  padding: 20px;
+  font-size: 20px;
+  width: 150px;
+  text-align: center;
+  align-self: center;
+  margin: 10px;
+}
+
+input[type="button"]:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
