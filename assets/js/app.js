@@ -23,23 +23,74 @@ const gameBoard = ((dController) => {
   let controller = dController;
   let currentPlayer;
   let actualGame;
+  let countMoves = 0;
+
   const setCurrentPlayer = (cPlayer) => {
     currentPlayer = cPlayer;
   }
+
   const getBoard = () => {
     return board;
-  };
+  }
+
   const applyMove = (indx, indy) => {
     let symbol = currentPlayer.getSymbol();
     if (board[indx][indy] === ''){
       board[indx][indy] = symbol;
       controller.renderBoard(board);
+      countMoves++;
+      return true;
     }
     else{
       alert('Spot taken');
     }
-  };
-  return {setCurrentPlayer, getBoard, applyMove};
+  }
+  
+  const checkWinStates = () => {
+    let won = false;
+    let check_array = [];
+    for (let i = 0; i < board.length; i++) {
+      check_array = [];
+      for (let j = 0; j < board.length; j++) {
+        check_array.push(board[j][i]); // 0,0 1,0 2,0
+      }
+      if(check_array.every(p => p === currentPlayer.getSymbol())) {
+        return true;
+      }
+    }
+
+    for (let i = 0; i < board.length; i++) {
+      check_array = [];
+      for (let j = 0; j < board.length; j++) {
+        check_array.push(board[i][j]); // 0,0 1,0 2,0
+      }
+      if(check_array.every(p => p === currentPlayer.getSymbol())) {
+        return true;
+      }
+    }
+
+    check_array = [];
+    for (let i = 0; i < board.length; i++) {
+      check_array.push(board[i][i]);
+    }
+    if(check_array.every(p => p === currentPlayer.getSymbol())) {
+      return true;
+    }
+
+    check_array = [];
+    for (let i = 0; i < board.length; i++) {
+      check_array.push(board[i][board.length-1-i]);
+    }
+    if(check_array.every(p => p === currentPlayer.getSymbol())) {
+      return true;
+    }
+
+    if(countMoves === board.length*board.length){
+      return 'Tie';
+    }
+  }
+
+  return {setCurrentPlayer, getBoard, applyMove, checkWinStates};
 })(displayController);
 
 const Player = (pname, psymbol) => {
@@ -74,9 +125,27 @@ const game = (() => {
     gameBoard.setCurrentPlayer(currentPlayer);
   }
 
+  const handleWinStates = () => {
+    switch(gameBoard.checkWinStates()) {
+      case true : {
+        alert('gano el player ' + currentPlayer.getName());
+        break;
+      }
+      case 'Tie' : {
+        alert("It's a tie !");
+        break;
+      }
+      
+    }
+  }
+
   const applyMove = (x,y) => {
-    gameBoard.applyMove(x,y);
-    changeTurn();
+    if(gameBoard.applyMove(x,y) == true)
+    {
+      handleWinStates();
+      changeTurn();
+    }
+    
   }
 
   return {startGame, applyMove}
