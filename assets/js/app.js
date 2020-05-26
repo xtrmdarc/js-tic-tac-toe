@@ -13,7 +13,7 @@ const displayController = (() => {
   };
 
   return {
-    renderBoard
+    renderBoard,
   };
 })();
 
@@ -22,6 +22,7 @@ const gameBoard = ((dController) => {
   const controller = dController;
   let currentPlayer;
   let countMoves = 0;
+  const message = document.getElementById('message');
 
   const setCurrentPlayer = (cPlayer) => {
     currentPlayer = cPlayer;
@@ -31,19 +32,19 @@ const gameBoard = ((dController) => {
     board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
     countMoves = 0;
   };
-  const getBoard = () => {
-    return board;
-  };
+  const getBoard = () => board;
 
   const applyMove = (indx, indy) => {
     const symbol = currentPlayer.getSymbol();
     if (board[indx][indy] === ' ') {
+      message.style = 'display: none';
       board[indx][indy] = symbol;
       controller.renderBoard(board);
       countMoves += 1;
       return true;
     }
-    alert('Spot taken');
+    message.innerText = 'Spot taken';
+    message.style = 'display: block';
     return false;
   };
 
@@ -91,18 +92,16 @@ const gameBoard = ((dController) => {
     }
     return false;
   };
-  return { setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard };
+  return {
+    setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard,
+  };
 })(displayController);
 
 const Player = (pname, psymbol) => {
   const name = pname;
   const symbol = psymbol;
-  const getName = () => {
-    return name;
-  };
-  const getSymbol = () => {
-    return symbol;
-  };
+  const getName = () => name;
+  const getSymbol = () => symbol;
   return { getName, getSymbol };
 };
 
@@ -110,13 +109,16 @@ const game = (() => {
   let player1;
   let player2;
   let currentPlayer;
+  let gameOn = false;
+  const message = document.getElementById('message');
 
   const startGame = (player1name, player2name) => {
     player1 = Player(player1name, 'X');
     player2 = Player(player2name, 'O');
     currentPlayer = player1;
     gameBoard.clearBoard();
-
+    message.style = 'display: none';
+    gameOn = true;
     displayController.renderBoard(gameBoard.getBoard());
     gameBoard.setCurrentPlayer(currentPlayer);
   };
@@ -133,11 +135,15 @@ const game = (() => {
   const handleWinStates = () => {
     switch (gameBoard.checkWinStates()) {
       case true: {
-        alert(`${currentPlayer.getName()} Wins! Click start to play again`);
+        gameOn = false;
+        message.innerText = `${currentPlayer.getName()} Wins! Click start to play again`;
+        message.style = 'display: block';
         break;
       }
       case 'Tie': {
-        alert("It's a tie ! Click start to play again");
+        gameOn = false;
+        message.innerText = 'It is a tie! Click start to play again';
+        message.style = 'display: block';
         break;
       }
       default: {
@@ -147,12 +153,14 @@ const game = (() => {
   };
 
   const applyMove = (x, y) => {
+    if (gameOn === false) {
+      return;
+    }
     if (gameBoard.applyMove(x, y) === true) {
       handleWinStates();
       changeTurn();
     }
   };
-
   return { startGame, applyMove };
 })();
 
