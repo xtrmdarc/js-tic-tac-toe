@@ -37,7 +37,7 @@ const gameBoard = ((dController) => {
 
   const applyMove = (indx, indy) => {
     const symbol = currentPlayer.getSymbol();
-    if (board[indx][indy] === '') {
+    if (board[indx][indy] === ' ') {
       board[indx][indy] = symbol;
       controller.renderBoard(board);
       countMoves += 1;
@@ -121,12 +121,6 @@ const game = (() => {
     gameBoard.setCurrentPlayer(currentPlayer);
   };
 
-  const startButton = () => {
-    const player1name = document.getElementById('p1name').value;
-    const player2name = document.getElementById('p2name').value;
-    game.startGame(player1name, player2name);
-  };
-
   const changeTurn = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -162,4 +156,8 @@ const game = (() => {
   return { startGame, applyMove };
 })();
 
-game.startGame();
+const startButton = () => {
+  const player1name = document.getElementById('p1name').value;
+  const player2name = document.getElementById('p2name').value;
+  game.startGame(player1name, player2name);
+};
