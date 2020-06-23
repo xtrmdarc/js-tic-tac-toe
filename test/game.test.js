@@ -1,7 +1,8 @@
+/* eslint-disable */
 import Mock from './mock';
 import Game from '../src/game';
 import Player from '../src/player';
-
+/* eslint-enable */
 const player1 = Player('Diego', 'X');
 const player2 = Player('Brenda', 'O');
 

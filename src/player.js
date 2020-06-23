@@ -4,7 +4,10 @@ const player = (pname, psymbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
 
-  return { getName, getSymbol }  
-}
+  return {
+    getName,
+    getSymbol,
+  };
+};
 
 export default player;

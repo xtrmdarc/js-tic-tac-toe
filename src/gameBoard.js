@@ -1,11 +1,13 @@
+/* eslint-disable */
 import displayController from './displayController';
+/* eslint-enable */
 
 const gameBoard = ((dController) => {
   let board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
   const controller = dController;
   let currentPlayer;
   let countMoves = 0;
-  
+
   const setCurrentPlayer = (cPlayer) => {
     currentPlayer = cPlayer;
   };
@@ -74,7 +76,7 @@ const gameBoard = ((dController) => {
     }
     return false;
   };
-  
+
   return {
     setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard,
   };

@@ -1,6 +1,8 @@
+/* eslint-disable */
 import GameBoard from './gameBoard';
 import Player from './player';
 import DisplayController from './displayController';
+/* eslint-enable */
 
 const game = (() => {
   let player1;
@@ -58,6 +60,7 @@ const game = (() => {
       changeTurn();
       return true;
     }
+    return false;
   };
   return { startGame, applyMove };
 })();
