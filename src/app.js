@@ -1,15 +1,22 @@
+import './css/styles.css';
+
 const displayController = (() => {
   const domBoard = document.getElementById('board');
   const renderBoard = (board) => {
     let renderedBoard = '';
-
+    domBoard.innerHTML = '';
     for (let i = 0; i < board.length; i += 1) {
       for (let j = 0; j < board[i].length; j += 1) {
         const cellValue = board[i][j];
-        renderedBoard += ` <div class="cell" onclick='game.applyMove(${i},${j})'>${cellValue}</div>`;
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.textContent = cellValue;
+        cell.addEventListener('click', () => {
+          game.applyMove(i,j);
+        });
+        domBoard.appendChild(cell);
       }
     }
-    domBoard.innerHTML = renderedBoard;
   };
 
   return {
@@ -164,8 +171,8 @@ const game = (() => {
   return { startGame, applyMove };
 })();
 
-const startButton = () => {
+document.querySelector('#startgame').addEventListener('click', () => {
   const player1name = document.getElementById('p1name').value;
   const player2name = document.getElementById('p2name').value;
   game.startGame(player1name, player2name);
-};
+});
