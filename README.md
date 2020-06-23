@@ -12,6 +12,18 @@
 
 [Live Demo Version](https://raw.githack.com/xtrmdarc/js-tic-tac-toe/feature/index.html)
 
+## Testing Suite
+- Jest
+
+![test suite preview](./test-preview.png)
+
+## NPM available scripts
+Use "npm run-script " followed by any of the following commands : 
+
+- "build": "webpack --mode production"
+- "watch": "webpack --mode development --watch"
+- "test": "jest"
+
 ## Authors
 
 👤 **Diego Antonio Reyes Coronado**
