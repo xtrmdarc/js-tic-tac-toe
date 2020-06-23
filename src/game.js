@@ -1,6 +1,6 @@
-import gameBoard from './gameBoard';
+import GameBoard from './gameBoard';
 import Player from './player';
-import displayController from './displayController';
+import DisplayController from './displayController';
 
 const game = (() => {
   let player1;
@@ -13,11 +13,11 @@ const game = (() => {
     player1 = Player(player1name, 'X');
     player2 = Player(player2name, 'O');
     currentPlayer = player1;
-    gameBoard.clearBoard();
+    GameBoard.clearBoard();
     message.style = 'display: none';
     gameOn = true;
-    displayController.renderBoard(gameBoard.getBoard());
-    gameBoard.setCurrentPlayer(currentPlayer);
+    DisplayController.renderBoard(GameBoard.getBoard());
+    GameBoard.setCurrentPlayer(currentPlayer);
   };
 
   const changeTurn = () => {
@@ -26,11 +26,11 @@ const game = (() => {
     } else {
       currentPlayer = player1;
     }
-    gameBoard.setCurrentPlayer(currentPlayer);
+    GameBoard.setCurrentPlayer(currentPlayer);
   };
 
   const handleWinStates = () => {
-    switch (gameBoard.checkWinStates()) {
+    switch (GameBoard.checkWinStates()) {
       case true: {
         gameOn = false;
         message.innerText = `${currentPlayer.getName()} Wins! Click start to play again`;
@@ -53,7 +53,7 @@ const game = (() => {
     if (gameOn === false) {
       return;
     }
-    if (gameBoard.applyMove(x, y) === true) {
+    if (GameBoard.applyMove(x, y) === true) {
       handleWinStates();
       changeTurn();
     }

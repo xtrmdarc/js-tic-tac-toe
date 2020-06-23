@@ -2,6 +2,8 @@ import game from './game';
 
 const displayController = (() => {
   const domBoard = document.getElementById('board');
+  const message = document.getElementById('message');
+
   const renderBoard = (board) => {
     let renderedBoard = '';
     domBoard.innerHTML = '';
@@ -18,8 +20,20 @@ const displayController = (() => {
       }
     }
   };
+
+  const hideMessage = () => {
+    message.style.display = 'none';
+  }
+
+  const showMessage = (msg) => {
+    message.style.display = 'block';
+    message.textContent = msg;
+  }
+
   return {
     renderBoard,
+    hideMessage,
+    showMessage,
   };
 })();
 

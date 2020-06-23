@@ -5,8 +5,7 @@ const gameBoard = ((dController) => {
   const controller = dController;
   let currentPlayer;
   let countMoves = 0;
-  const message = document.getElementById('message');
-
+  
   const setCurrentPlayer = (cPlayer) => {
     currentPlayer = cPlayer;
   };
@@ -15,20 +14,19 @@ const gameBoard = ((dController) => {
     board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
     countMoves = 0;
   };
+
   const getBoard = () => board;
 
   const applyMove = (indx, indy) => {
     const symbol = currentPlayer.getSymbol();
     if (board[indx][indy] === ' ') {
-      message.style = 'display: none';
+      displayController.hideMessage();
       board[indx][indy] = symbol;
       controller.renderBoard(board);
       countMoves += 1;
-      console.log(currentPlayer.getName());
       return true;
     }
-    message.innerText = 'Spot taken';
-    message.style = 'display: block';
+    displayController.showMessage('Spot Taken');
     return false;
   };
 
@@ -76,6 +74,7 @@ const gameBoard = ((dController) => {
     }
     return false;
   };
+  
   return {
     setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard,
   };
