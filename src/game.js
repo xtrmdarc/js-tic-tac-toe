@@ -51,11 +51,12 @@ const game = (() => {
 
   const applyMove = (x, y) => {
     if (gameOn === false) {
-      return;
+      return false;
     }
     if (GameBoard.applyMove(x, y) === true) {
       handleWinStates();
       changeTurn();
+      return true;
     }
   };
   return { startGame, applyMove };
