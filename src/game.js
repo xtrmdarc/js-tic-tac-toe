@@ -35,6 +35,8 @@ const game = (() => {
 
   const getCurrentPlayer = () => currentPlayer;
 
+  const getCurrentPlayerName = () => currentPlayer.getName();
+
   const handleWinStates = () => {
     switch (GameBoard.checkWinStates()) {
       case true: {
@@ -66,6 +68,7 @@ const game = (() => {
     }
     return false;
   };
+
   return {
     startGame,
     getCurrentPlayer,
@@ -73,6 +76,7 @@ const game = (() => {
     applyMove,
     handleWinStates,
     changeTurn,
+    getCurrentPlayerName,
   };
 })();
 

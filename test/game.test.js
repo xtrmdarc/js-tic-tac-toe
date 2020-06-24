@@ -16,24 +16,24 @@ test('It should return false if the game does not start and try to apply a move'
 });
 
 test('It should return true if the game starts correctly', () => {
-  Game.startGame(player1, player2);
+  Game.startGame(player1.getName(), player2.getName());
   expect(Game.getGameStatus()).toBe(true);
 });
 
 test('It should return true if the game starts correctly and the player applies a move', () => {
-  Game.startGame(player1, player2);
+  Game.startGame(player1.getName(), player2.getName());
   expect(Game.applyMove(0, 1)).toBe(true);
 });
 
 test('It should return the name of the player1 if the game starts', () => {
-  Game.startGame(player1, player2);
-  expect((Game.getCurrentPlayer()).getName().getName()).toEqual(player1.getName());
+  Game.startGame(player1.getName(), player2.getName());
+  expect((Game.getCurrentPlayer()).getName()).toEqual(player1.getName());
 });
 
 test('It should return the name of the player2 if the player1 finished', () => {
-  Game.startGame(player1, player2);
+  Game.startGame(player1.getName(), player2.getName());
   Game.applyMove(0, 2);
-  expect((Game.getCurrentPlayer()).getName().getName()).toEqual(player2.getName());
+  expect((Game.getCurrentPlayer()).getName()).toEqual(player2.getName());
 });
 
 test('It should finish the game if someone wins', () => {
@@ -42,4 +42,11 @@ test('It should finish the game if someone wins', () => {
   Game.handleWinStates();
   expect(Game.getGameStatus()).toBe(false);
   GameBoard.clearBoard();
+});
+
+test("It should return the next player's name after the turn changed", () => {
+  Game.startGame(player1.getName(), player2.getName());
+  expect(Game.getCurrentPlayer().getName()).toBe(player1.getName());
+  Game.changeTurn();
+  expect(Game.getCurrentPlayer().getName()).toBe(player2.getName());
 });

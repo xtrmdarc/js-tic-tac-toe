@@ -48,12 +48,34 @@ const mockHtml = (() => {
     board.applyMove(2, 2);
   };
 
+  const mockTie = (player1, player2, board) => {
+    board.setCurrentPlayer(player1);
+    board.applyMove(0, 0);
+    board.setCurrentPlayer(player2);
+    board.applyMove(0, 1);
+    board.setCurrentPlayer(player1);
+    board.applyMove(1, 1);
+    board.setCurrentPlayer(player2);
+    board.applyMove(1, 0);
+    board.setCurrentPlayer(player1);
+    board.applyMove(1, 2);
+    board.setCurrentPlayer(player2);
+    board.applyMove(0, 2);
+    board.setCurrentPlayer(player1);
+    board.applyMove(2, 0);
+    board.setCurrentPlayer(player2);
+    board.applyMove(2, 2);
+    board.setCurrentPlayer(player1);
+    board.applyMove(2, 1);
+  }
+
   return {
     initializeDOM,
     mockHorizontalWin,
     mockVerticalWin,
     mockDiagonalWin,
     mockReverseDiagonalWin,
+    mockTie,
   };
 })();
 

@@ -65,6 +65,19 @@ test('It should return true if the player one wins with a reverse diagonal 3-in-
   expect(GameBoard.checkWinStates()).toBe(true);
 });
 
+test('It should return false if there is no winner', () => {
+  GameBoard.clearBoard();
+  GameBoard.setCurrentPlayer(player1);
+  GameBoard.applyMove(0,0);
+  expect(GameBoard.checkWinStates()).toBe(false);
+});
+
+test('It should return tie if no one won after all movements have been placed', () => {
+  GameBoard.clearBoard();
+  Mock.mockTie(player1, player2, GameBoard);
+  expect(GameBoard.checkWinStates()).toBe('Tie');
+});
+
 test('It should return a empty board after players make their movement and the gets cleared', () => {
   Mock.mockDiagonalWin(player1, GameBoard);
   GameBoard.clearBoard();
