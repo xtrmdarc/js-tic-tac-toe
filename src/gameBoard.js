@@ -12,6 +12,8 @@ const gameBoard = ((dController) => {
     currentPlayer = cPlayer;
   };
 
+  const getMoves = () => countMoves;
+
   const clearBoard = () => {
     board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
     countMoves = 0;
@@ -78,7 +80,7 @@ const gameBoard = ((dController) => {
   };
 
   return {
-    setCurrentPlayer, getBoard, applyMove, checkWinStates, clearBoard,
+    setCurrentPlayer, getBoard, getMoves, applyMove, checkWinStates, clearBoard,
   };
 })(displayController);
 

@@ -22,6 +22,8 @@ const game = (() => {
     GameBoard.setCurrentPlayer(currentPlayer);
   };
 
+  const getGameStatus = () => gameOn;
+
   const changeTurn = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -30,6 +32,8 @@ const game = (() => {
     }
     GameBoard.setCurrentPlayer(currentPlayer);
   };
+
+  const getCurrentPlayer = () => currentPlayer;
 
   const handleWinStates = () => {
     switch (GameBoard.checkWinStates()) {
@@ -62,7 +66,14 @@ const game = (() => {
     }
     return false;
   };
-  return { startGame, applyMove };
+  return {
+    startGame,
+    getCurrentPlayer,
+    getGameStatus,
+    applyMove,
+    handleWinStates,
+    changeTurn,
+  };
 })();
 
 export default game;
