@@ -67,7 +67,7 @@ const mockHtml = (() => {
     board.applyMove(2, 2);
     board.setCurrentPlayer(player1);
     board.applyMove(2, 1);
-  }
+  };
 
   return {
     initializeDOM,

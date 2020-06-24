@@ -68,7 +68,7 @@ test('It should return true if the player one wins with a reverse diagonal 3-in-
 test('It should return false if there is no winner', () => {
   GameBoard.clearBoard();
   GameBoard.setCurrentPlayer(player1);
-  GameBoard.applyMove(0,0);
+  GameBoard.applyMove(0, 0);
   expect(GameBoard.checkWinStates()).toBe(false);
 });
 
